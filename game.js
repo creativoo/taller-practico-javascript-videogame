@@ -35,6 +35,7 @@ function startGame () {
         }
     }
 
+    
     // window.innerHeight
     // window.innerWidth
 
