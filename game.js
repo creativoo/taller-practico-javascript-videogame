@@ -1,10 +1,13 @@
 const canvas = document.querySelector("#game");
 const game = canvas.getContext ("2d");
 
-window.addEventListener("load", startGame);
+let canvasSize;
+let elementsSize;
 
-function startGame () {
-    let canvasSize;
+window.addEventListener("load", setCanvasSize);
+window.addEventListener("resize", setCanvasSize);
+
+function setCanvasSize () {
 
     if (window.innerHeight > window.innerWidth) {
         canvasSize = window.innerWidth * 0.8;
@@ -14,8 +17,13 @@ function startGame () {
 
     canvas.setAttribute ("width", canvasSize);
     canvas.setAttribute ("height", canvasSize);
+    elementsSize = (canvasSize / 10) -1;
 
-    const elementsSize = (canvasSize / 10) -1;
+    startGame();
+}
+
+function startGame () {
+
     console.log ({canvasSize, elementsSize});
 
     game.font = elementsSize + "px Verdana";
@@ -26,11 +34,8 @@ function startGame () {
             game.fillText(emojis["X"], elementsSize * i, elementsSize * z)
         }
     }
-    
-   
 
-
-    // window.innerHeight 
+    // window.innerHeight
     // window.innerWidth
 
     // game.fillRect(0,50,100,100); // De que punto partirá el cuadrado y cuanto medirá (x=0, y=0, tamaño x=100, y=100)
