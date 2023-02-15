@@ -1,4 +1,5 @@
 {
     "liveshare.accessibility.voice": "es-ES-Elvira",
-    "liveServer.settings.CustomBrowser": "microsoft-edge"
+    "liveServer.settings.CustomBrowser": "microsoft-edge",
+    "editor.guides.bracketPairs": true
 }

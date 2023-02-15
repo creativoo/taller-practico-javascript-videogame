@@ -1,50 +1,50 @@
-const canvas = document.querySelector("#game");
-const game = canvas.getContext ("2d");
+const canvas = document.querySelector('#game');
+const game = canvas.getContext('2d');
 
 let canvasSize;
 let elementsSize;
 
-window.addEventListener("load", setCanvasSize);
-window.addEventListener("resize", setCanvasSize);
+window.addEventListener('load', setCanvasSize);
+window.addEventListener('resize', setCanvasSize);
 
-function setCanvasSize () {
+function setCanvasSize() {
+  if (window.innerHeight > window.innerWidth) {
+    canvasSize = window.innerWidth * 0.8;
+  } else {
+    canvasSize = window.innerHeight * 0.8;
+  }
+  
+  canvas.setAttribute('width', canvasSize);
+  canvas.setAttribute('height', canvasSize);
+  
+  elementsSize = canvasSize / 10;
 
-    if (window.innerHeight > window.innerWidth) {
-        canvasSize = window.innerWidth * 0.8;
-    } else {
-        canvasSize = window.innerHeight * 0.8;
-    }
-
-    canvas.setAttribute ("width", canvasSize);
-    canvas.setAttribute ("height", canvasSize);
-    elementsSize = (canvasSize / 10) -1;
-
-    startGame();
+  startGame();
 }
 
-function startGame () {
+function startGame() {
+  console.log({ canvasSize, elementsSize });
 
-    console.log ({canvasSize, elementsSize});
+  game.font = elementsSize + 'px Verdana';
+  game.textAlign = 'end';
 
-    game.font = elementsSize + "px Verdana";
-    game.textAlign = "";
+  const map = maps[0];
+  const mapRows = map.trim().split('\n');
+  const mapRowCols = mapRows.map(row => row.trim().split(''));
+  console.log({map, mapRows, mapRowCols});
+  
+  mapRowCols.forEach ((row, rowI) => {
+    row.forEach((col, colI) => {
+      const emoji = emojis[col];
+      const posX = elementsSize * (colI + 1);
+      const posY = elementsSize * (rowI + 1);
+      game.fillText(emoji, posX, posY);
+    });
+  });
 
-    for (let i=0; i <= 10; i++) {
-        for (let z = 1 ; z < 11; z++) {
-            game.fillText(emojis["X"], elementsSize * i, elementsSize * z)
-        }
-    }
-
-    
-    // window.innerHeight
-    // window.innerWidth
-
-    // game.fillRect(0,50,100,100); // De que punto partirá el cuadrado y cuanto medirá (x=0, y=0, tamaño x=100, y=100)
-    // game.clearRect (50,50,50,50); // Sirve para borrar el rectángulo.
-    // game.clearRect ()
-
-    // game.font = "25px Verdana";
-    // game.fillStyle = "purple";
-    // game.textAlign = "center"; // inicia o termina el texto en la acción aplicada si aplicas "End" terminará en el fillText indicado (25,25).
-    // game.fillText("Platzi", 25,25);
+//  for (let row = 1; row <= 10; row++) {
+//    for (let col = 1; col <= 10; col++) {
+//      game.fillText(emojis[mapRowCols[row - 1][col - 1]], elementsSize * col, elementsSize * row);
+//    }
+//  }
 }
